@@ -1,16 +1,14 @@
 package level01.exercise01.model;
 
+import level01.exercise01.validators.ProductValidator;
+import level01.exercise01.exceptions.InvalidProductException;
+
 public class Product {
     private final String name;
     private final double price;
 
-    public Product(String name, double price) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Product name cannot be empty.");
-        }
-        if (price < 0) {
-            throw new IllegalArgumentException("Price cannot be negative.");
-        }
+    public Product(String name, double price) throws InvalidProductException {
+        ProductValidator.validate(name, price);
         this.name = name;
         this.price = price;
     }
